@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JAZZ MACHINE</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+  <div id="loader"></div>
+
+  <section id="text">
+  </section>
+	<canvas></canvas>
+  <section id="photos"></section>
+  <section id="title">
+    <h1 class="top">
+      <span>J</span>
+      <span>a</span>
+      <span>z</span>
+      <span>z</span>
+    </h1>
+    <h1 class="bottom">
+      <span>M</span>
+      <span>a</span>
+      <span>c</span>
+      <span>h</span>
+      <span>i</span>
+      <span>n</span>
+      <span>e</span>
+    </h1>
+    <div id="loadingbar"><span></span></div>
+    <button id="btn1">play</button>
+  </section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+var imgs = [];
+var counter = 0;
+var loadcounter = 0;
+$.getJSON( "js/archives.json", function( data ) {
+  $(data.response.docs).each(function() {
+    $.getJSON( "https://archive.org/metadata/" + this.identifier, function( thing ) {
+      if (counter < 30) {
+        var thisurl = "https://" + thing.d1 + thing.dir + "/"
+        $.each(thing.files, function() {
+          if (this.source == "original" && this.format == "JPEG") {
+            imgs.push(thisurl + this.name)
+            let loader = '<img src="'+ thisurl + this.name + '" />'
+            
+            counter++
+            $(loader).appendTo('#loader').on('load', function() {
+              loadcounter++
+              
+              $('#loadingbar span').css('width',(loadcounter / 30 * 100) + '%')
+
+              if (loadcounter == 30) {
+                $('#title').addClass('ready')
+              }
+            })
+          }
+        })
+      }
+    })
+  })
+})
+</script>
+
+<script src="js/Tone.js"></script>
+<script src="js/index.js"></script>
+
+</body>
+</html>

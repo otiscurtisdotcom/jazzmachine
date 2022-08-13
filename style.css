@@ -1,0 +1,170 @@
+@font-face {
+    font-family: 'PV';
+    src: url('fonts/pv.woff2') format('woff2');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+	background-color: #65DB9E;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+canvas, section {
+	width:100%;
+	height:100%;
+	position: fixed;
+}
+
+.imgwrap img {
+  filter: saturate(0) contrast(10);
+  width: 100%;
+  float: left;
+  mix-blend-mode: multiply;
+}
+
+.imgwrap {
+  width: 20%;
+  position: absolute;
+  background-color: salmon;
+}
+
+#loader {
+  position: fixed;
+  opacity: 0;
+  left: -300%;
+}
+
+h1, h2 {
+  font-family: 'PV';
+  font-variation-settings: 'wdth' 756;
+  width: auto;
+  font-size: 130vh;
+  position: fixed;
+  top: 5vh;
+  left: 0;
+  transition: transform 10s;
+  line-height: 100vh;
+  margin: 0;
+  transform: translateX(150%);
+  color: #fff;
+  text-align: center;
+}
+
+h2.on {
+  transform: translateX(-150%);
+}
+
+#title {
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  height: 400px;
+  margin-top: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#title.on {
+  opacity: 1;
+}
+
+h1 {
+  position: absolute;
+  transform: none;
+  line-height: 260px;
+  font-size: 260px;
+  top: 0;
+  width: 100%;
+  float: left;
+  height: 50%;
+  text-align: left;
+}
+
+h1.top {
+  font-variation-settings: 'wdth' 680;
+  letter-spacing: -19px;
+}
+
+h1.bottom {
+  top: 50%;
+  font-variation-settings: 'wdth' 0;
+  letter-spacing: -20px;
+}
+
+#btn1, #loadingbar {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -120px;
+  height: 60px;
+  -webkit-appearance: none;
+  border: none;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 20px;
+  padding: 20px 40px;
+  background-color: transparent;
+  outline: none !important;
+}
+
+#btn1 {
+  opacity: 0;
+  transition: opacity 0.2s;
+  transition-delay: 0.5s;
+  cursor: pointer;
+  width: 150px;
+}
+
+#title.ready #btn1 {
+  opacity: 1;
+}
+
+#loadingbar {
+  width: 100%;
+  background-color: #000a;
+  transition: width 0.3s;
+  transition-delay: 0.3s;
+}
+
+#loadingbar span {
+  background-color: #fff;
+  position: absolute;
+  left: 0;
+  width: 0;
+  display: block;
+  height: 100%;
+  top: 0;
+  transition: width 0.1s;
+}
+
+#title.ready #loadingbar {
+  width: 150px;
+}
+
+@media (max-height: 750px), (max-width: 1000px) {
+  #title {
+    width: 500px;
+    height: 240px;
+  }
+  h1 {
+    font-size: 120px;
+    line-height: 120px;
+  }
+  h1.top {
+      letter-spacing: -25px;
+      font-variation-settings: 'wdth' 1000;
+  }
+
+  h1.bottom {
+      font-variation-settings: 'wdth' 0;
+      letter-spacing: -5px;
+  }
+}
